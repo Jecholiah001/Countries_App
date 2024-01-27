@@ -114,7 +114,7 @@ export default function Homepage() {
 
           <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 xl:gap-16 mx-10 lg:mx-10 xl:mx-20'>
             {countries.map((country) => (
-            <Card key={country.alpha3Code} {...country} />
+            <Card key={country.name.official} {...country} />
             ))}
           </div>
   </>
