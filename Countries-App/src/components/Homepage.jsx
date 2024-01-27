@@ -37,9 +37,9 @@ export default function Homepage() {
             },
           ]
 
-  useEffect(() => {
-    document.title = `Showing All Countries`;
-  }, []);
+  // useEffect(() => {
+  //   document.title = `Showing All Countries`;
+  // }, []);
 
   useEffect(() => {
     const getCountries = async () => {
@@ -92,12 +92,15 @@ export default function Homepage() {
 
   return (
     <>
-          <div className="flex flex-col md:flex-row md:my-10 " >
+
+          <div className="flex  flex-col md:flex-row md:my-10 md:gap-[370px] lg:gap-[570px] xl:gap-[900px]" >
+            {/* Search Area */}
             <form onSubmit={handleSearchCountry} autoComplete="off" className='flex items-center'>
               <FaSearch className='my-auto absolute ml-8 xl:ml-24  md:ml-14 lg:w-[14px] md:w-[11px] w-[8px] fill-black dark:fill-white'/>
               <input type="text" placeholder="Search for a country..." value={searchText}  onChange={(e) => setSearchText(e.target.value)} className="lg:pl-10 pl-8 p-2  shadow-md rounded-md md:w-[100%] w-[89%] mx-4 md:ml-11 lg:ml-10 xl:ml-20 text-[10px] md:text-[12px] lg:text-[16px]  dark:bg-darkBlue dark:text-white"/>
             </form>  
-      
+
+            {/* Filtering countries by region*/}
             <form onSubmit={handleFilterByRegion}>   
               <select name='filter-by-region' id='filter-by-region' value={regions.name} onChange={(e) => filterByRegion(e.target.value)} className="ml-4 md:ml-auto my-5 md:my-2   p-2 shadow-md rounded-md text-[10px] md:text-[12px] lg:text-[16px]  font-medium  dark:bg-darkBlue dark:text-white">
                 {regions.map((region, index) => (
@@ -111,7 +114,7 @@ export default function Homepage() {
 
           <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 xl:gap-16 mx-10 lg:mx-10 xl:mx-20'>
             {countries.map((country) => (
-            <Card key={country.name.common} {...country} />
+            <Card key={country.alpha3Code} {...country} />
             ))}
           </div>
   </>

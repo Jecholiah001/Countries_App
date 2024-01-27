@@ -4,8 +4,6 @@ import Detailspage from './components/Detailspage'
 import Homepage from './components/HomePage'
 
 function App() {
-
-
   return (
     <>
     <div className= 'w-screen h-full bg-gray-200 dark:bg-darkerBlue'>
