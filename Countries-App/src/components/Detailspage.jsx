@@ -52,9 +52,7 @@ export default function Detailspage() {
         >
           <FaArrowLeft className="mt-1" />Back
         </Link>
-
         {country === null && <div>Loading...</div>}
-
         { Array.isArray(country) && country.map((item, index) => (
           <div key={index} className="md:flex w-full">
             <img
