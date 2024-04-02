@@ -92,8 +92,8 @@ export default function Homepage() {
 
   return (
     <>
-
-          <div className="flex  flex-col md:flex-row md:my-10 md:gap-[370px] lg:gap-[570px] xl:gap-[900px]" >
+    <div className="h-full">
+          <div className="flex  flex-col md:flex-row md:my-10 md:gap-[370px] lg:gap-[570px] xl:gap-[900px] 2xl:gap-[1150px]" >
             {/* Search Area */}
             <form onSubmit={handleSearchCountry} autoComplete="off" className='flex items-center'>
               <FaSearch className='my-auto absolute ml-8 xl:ml-24  md:ml-14 lg:w-[14px] md:w-[11px] w-[8px] fill-black dark:fill-white'/>
@@ -112,10 +112,11 @@ export default function Homepage() {
             </form>
           </div>
 
-          <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 xl:gap-16 mx-10 lg:mx-10 xl:mx-20'>
+          <div className='pb-[500px] grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 xl:gap-16 mx-10 lg:mx-10 xl:mx-20'>
             {countries.map((country, index) => (
             <Card key={index} {...country} />
             ))}
+          </div>
           </div>
   </>
 )
