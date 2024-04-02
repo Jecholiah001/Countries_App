@@ -37,9 +37,9 @@ export default function Homepage() {
             },
           ]
 
-  // useEffect(() => {
-  //   document.title = `Showing All Countries`;
-  // }, []);
+  useEffect(() => {
+    document.title = `Showing All Countries`;
+  }, []);
 
   useEffect(() => {
     const getCountries = async () => {
@@ -113,8 +113,8 @@ export default function Homepage() {
           </div>
 
           <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 xl:gap-16 mx-10 lg:mx-10 xl:mx-20'>
-            {countries.map((country) => (
-            <Card key={country.name.official} {...country} />
+            {countries.map((country, index) => (
+            <Card key={index} {...country} />
             ))}
           </div>
   </>

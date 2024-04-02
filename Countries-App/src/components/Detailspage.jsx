@@ -5,7 +5,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 
 export default function Detailspage() {
-  const [country, setCountry] = useState([]);
+  const [country, setCountry] = useState(null);
   const [borderCountries, setBorderCountries] = useState([]);
   const { name } = useParams();
 
@@ -37,7 +37,7 @@ export default function Detailspage() {
     };
 
     getCountry();
-  }, [name]);
+  }, [name,setCountry, setBorderCountries]);
 
   useEffect(() => {
     document.title = `Countries | ${name}`;
@@ -53,8 +53,10 @@ export default function Detailspage() {
           <FaArrowLeft className="mt-1" />Back
         </Link>
 
-        {country.map((item) => (
-          <div key={item.alpha3Code} className="md:flex w-full">
+        {country === null && <div>Loading...</div>}
+
+        { Array.isArray(country) && country.map((item, index) => (
+          <div key={index} className="md:flex w-full">
             <img
               className="xl:w-[50%] lg:w-[45%] md:w-[50%] w-[87%] xl:mx-20 lg:mx-10 md:mx-10 mx-5"
               src={item.flags.png}
@@ -73,26 +75,31 @@ export default function Detailspage() {
                   <li className="font-bold">Capital: <span className="font-normal">{item.capital[0]}</span></li>
                 </ul>
 
-                <ul className="w-[50%] my-4 mb-10 md:mt-0 md:mb-0 flex flex-col items-start justify-start gap-3 text-slate-700 dark:text-gray-400">
+                <ul className="md:w-[50%]  my-4 mb-10 md:mt-0 md:mb-0 flex flex-col items-start justify-start gap-3 text-slate-700 dark:text-gray-400">
                   <li className="font-bold">Top Level Domain: <span className="font-normal">{item.tld}</span></li>
                   <li className="font-bold">Currencies: <span className="font-normal">{Object.keys(item.currencies)}</span></li>
                   <li className="font-bold">Languages: <span className="font-normal">{Object.values(item.languages).join(", ")}</span></li>
                 </ul>
               </div>
 
-              <div className=" flex gap-2 lg:text-[16px] text-[10px]">
-                <h2 className="text-gray-900 dark:text-white font-bold mt-2">Border Countries:</h2>
+              <div className=" w-full flex gap-2 l g:text-[16px] text-[10px]">
+                <h2 className="w-40 text-gray-900 dark:text-white font-bold mt-2">Border Countries:</h2>
                 {borderCountries.map((borderCountry) => (
-                  <Link key={borderCountry} to={`/${borderCountry}`}>
-                    <button className="flex p-2  shadow-lg text-gray-900 dark:text-white bg-white dark:bg-darkBlue">
+                  <div className="flex " key={borderCountry}>
+                  <Link to={`/${borderCountry}`}>
+                    <button className="p-2  rounded shadow-lg text-gray-900 dark:text-white bg-white dark:bg-darkBlue">
                       {borderCountry}
                     </button>
                   </Link>
+                  </div>
                 ))}
               </div>
             </div>
           </div>
         ))}
+        {country !== null && !Array.isArray(country) && (
+          <div className="error-message">Error fetching country details</div>
+        )}
       </section>
     </>
   );
